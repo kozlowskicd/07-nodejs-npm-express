@@ -44,13 +44,15 @@ Article.fetchAll = () => {
 }
 
 // REVIEW: This new prototype method on the Article object constructor will allow us to create a new article from the new.html form page, and submit that data to the back-end. We will see this log out to the server in our terminal!
-Article.prototype.insertRecord = function(callback) {
-  $.post('/articles', {author: this.author, authorUrl: this.authorUrl, body: this.body, category: this.category, publishedOn: this.publishedOn, title: this.title})
+Article.prototype.insertRecord = function(callback){
+  $.post('/articles', {title: this.title, category: this.category, author: this.author, authorUrl: this.authorUrl, publishedOn: this.publishedOn, body: this.body })
     .then(data => {
       console.log(data);
-
+      let oldArticle = JSON.parse(localStorage.getItem('rawData')) || [];
+      oldArticle.push(data);
+      localStorage.setItem('rawData', JSON.stringify(oldArticle));
       // COMMENT: What is the purpose of this line? Is the callback invoked when this method is called? Why or why not?
-      // PUT YOUR RESPONSE HERE
+      // When the function is called when creating a new blog article it is called without a parameter. The callback parameter is not invoked when this method is called because a parameter is not being included when it was called in articleView.
       if (callback) callback();
     })
 };

@@ -75,7 +75,10 @@ articleView.setTeasers = () => {
 };
 
 // COMMENT: When/where is this function invoked? What event ultimately triggers its execution? Explain the sequence of code execution when this function is invoked.
-// PUT YOUR RESPONSE HERE
+// This function is invoked in "new.html" page. It runs when the input's tags in new.html change focus.
+// First, its going to show the tab-content(preview box) then hide the export field
+// Then whenever any inputs box is focused on will run the select method
+// Then use the inputs value to create the #new-form and run submit function.
 articleView.initNewArticlePage = () => {
   $('.tab-content').show();
   $('#export-field').hide();
@@ -88,7 +91,7 @@ articleView.initNewArticlePage = () => {
 };
 
 // COMMENT: When is this function called? What event ultimately triggers its execution?
-// PUT YOUR RESPONSE HERE
+// This function is called when there's changes on #new-form and ultimately trigger by creating a new blog article.
 articleView.create = () => {
   let article;
   $('#articles').empty();
